@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import numpy as np
 import copy
 
 opcodes = []
@@ -13,7 +12,7 @@ with open('input.txt', mode='r') as f:
 def intcode_comp(stack):
     def opcode(oc_i, stack):
         oc = stack[oc_i]
-        next_i = -1
+        next_i = -2
         if oc == 1:
             stack[stack[oc_i + 3]] = stack[stack[oc_i + 1]] + stack[stack[oc_i + 2]]
             next_i = oc_i + 4
