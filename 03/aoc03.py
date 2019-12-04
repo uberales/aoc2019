@@ -12,8 +12,8 @@ ex = re.compile('([RLDU])([0-9]*)')
 
 with open('input.txt') as f:
     lines = f.readlines()
-    wire_a = [(re.match(ex, s.strip()).group(1), int(re.match(ex, s.strip()).group(2))) for s in lines[0].split(',')]
-    wire_b = [(re.match(ex, s.strip()).group(1), int(re.match(ex, s.strip()).group(2))) for s in lines[1].split(',')]
+    wire_a = [(ex.match(s.strip()).group(1), int(ex.match(s.strip()).group(2))) for s in lines[0].split(',')]
+    wire_b = [(ex.match(s.strip()).group(1), int(ex.match(s.strip()).group(2))) for s in lines[1].split(',')]
 
 def walk(wire):
     path = [(0, 0)] # part 1
