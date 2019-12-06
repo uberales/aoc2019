@@ -9,12 +9,8 @@ with open('input.txt', 'r') as f:
     input_data = [l.strip().split(')') for l in lines]
     
 # structures
-
-orbits_down = {}
-for inp in input_data:
-    center = inp[0]
-    satellite = inp[1]    
-    orbits_down[satellite] = center
+    
+orbits_down = dict(zip([inp[1] for inp in input_data], [inp[0] for inp in input_data]))
 
 # task 1
         
