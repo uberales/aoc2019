@@ -21,11 +21,10 @@ def intcode_comp(stack, in_val = None, init_i = 0):
         oc = stack[oc_i]
                 
         oc_parts = [c for c in str(oc)]
-        oc_def = int('{}{}'.format(oc_parts[-2], oc_parts[-1])) if len(oc_parts) > 1 else int(oc_parts[-1])
-        mode_1 = int(oc_parts[-3]) if len(oc_parts) > 2 else 0
-        mode_2 = int(oc_parts[-4]) if len(oc_parts) > 3 else 0
-        mode_3 = int(oc_parts[-5]) if len(oc_parts) > 4 else 0
-        
+        oc_def = oc % 100
+        mode_1 = int((oc % 1000) / 100)
+        mode_2 = int((oc % 10000) / 1000)
+        mode_3 = int((oc % 100000) / 10000)        
         
         next_i = -2
         if oc_def == 1:
@@ -138,7 +137,7 @@ out_max_fb = 0
 
 def eval_max_feedback(phase_setting):
     global out_max_fb
-    out_max_fb = max(out_max, amplifier_feedback(phase_setting))
+    out_max_fb = max(out_max_fb, amplifier_feedback(phase_setting))
     
 def amplifier_feedback(phase_setting):
     
@@ -160,4 +159,4 @@ def amplifier_feedback(phase_setting):
 
 permute([5, 6, 7, 8, 9], 0, eval_max_feedback)
 
-print(out_max)
+print(out_max_fb)
