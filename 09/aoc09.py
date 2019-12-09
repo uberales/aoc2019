@@ -12,7 +12,7 @@ with open('input.txt', mode='r') as f:
 
 class IntcodeComputer():
 
-    from enum import Enum
+    from enum import IntEnum
     
     class IntcodeComputerStatus(Exception):
         pass
@@ -23,7 +23,7 @@ class IntcodeComputer():
     class ComputationDone(IntcodeComputerStatus):
         pass
     
-    class Modes(Enum):
+    class Modes(IntEnum):
         POSITION = 0
         IMMEDIATE = 1
         RELATIVE = 2
@@ -47,21 +47,21 @@ class IntcodeComputer():
         self.stack[address] = val
 
     def resolve_value(self, i, mode):        
-        if mode == self.Modes.POSITION.value: # position mode
+        if mode == self.Modes.POSITION: # position mode
             return self.stack_read(self.stack_read(i))
-        elif mode == self.Modes.IMMEDIATE.value: # immediate mode
+        elif mode == self.Modes.IMMEDIATE: # immediate mode
             return self.stack_read(i)
-        elif mode == self.Modes.RELATIVE.value: # relative mode
+        elif mode == self.Modes.RELATIVE: # relative mode
             return self.stack_read(self.relative_base + self.stack_read(i))
         else:
             raise NotImplementedError
 
     def resolve_address(self, i, mode):
-        if mode == self.Modes.POSITION.value: # position mode
+        if mode == self.Modes.POSITION: # position mode
             return self.stack_read(i)
-        elif mode == self.Modes.IMMEDIATE.value: # immediate mode
+        elif mode == self.Modes.IMMEDIATE: # immediate mode
             raise ValueError('Invalid reading mode')
-        elif mode == self.Modes.RELATIVE.value: # relative mode
+        elif mode == self.Modes.RELATIVE: # relative mode
             return self.relative_base + self.stack_read(i)
         else:
             raise NotImplementedError
