@@ -18,12 +18,12 @@ def check(i, dim):
     return i >= 0 and i < dim
 
 directions = set()
-def add_dir(base_dir):
+def add_dir(dx, dy):
     multiples = (-1, 1)
     for m1 in multiples:
         for m2 in multiples:
-            directions.add((m1 * base_dir[0], m2 * base_dir[1]))
-            directions.add((m1 * base_dir[1], m2 * base_dir[0]))
+            directions.add((m1 * dx, m2 * dy))
+            directions.add((m1 * dy, m2 * dx))
 
 def gcd(a, b):
     if b == 0:
@@ -33,11 +33,11 @@ def gcd(a, b):
 
 # preparation
 
-add_dir((0, 1))
+add_dir(0, 1)
 for dx in range(1, width + 1):
     for dy in range(1, height + 1):
         if (gcd(dx, dy) == 1 and gcd(dy, dx) == 1):
-            add_dir((dx, dy))
+            add_dir(dx, dy)
 
 # part 1
 
